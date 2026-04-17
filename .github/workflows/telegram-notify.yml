@@ -15,6 +15,12 @@ jobs:
           DATE=$(TZ='Europe/London' date '+%d.%m.%Y, %H:%M')
           COMMIT_MSG=$(echo "${{ github.event.head_commit.message }}" | head -1)
 
-          MESSAGE="🏠 Обновился документ о продаже дома в Urcal 📅 ${DATE}%0A%0AЧто обновилось?%0A• ${COMMIT_MSG}%0A%0A🔗 Подробнее: https://ararostov.github.io/urcal-sale/"
+          MESSAGE="🏠 Обновился документ о продаже дома в Urcal 📅 ${DATE}
 
-          curl -s "https://api.callmebot.com/text.php?user=@aralondon&text=${MESSAGE}"
+Что обновилось?
+• ${COMMIT_MSG}
+
+🔗 Подробнее: https://ararostov.github.io/urcal-sale/"
+
+          ENCODED=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.read()))" <<< "$MESSAGE")
+          curl -s "https://api.callmebot.com/text.php?user=@aralondon&text=${ENCODED}"
