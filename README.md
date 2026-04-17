@@ -6,3 +6,4 @@
 - **Паспорт проекта:** `overview.html` → [PROJECT_OVERVIEW.md](./PROJECT_OVERVIEW.md)
 
 Страница публикуется через GitHub Pages.
+
