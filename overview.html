@@ -140,6 +140,14 @@
   </div>
 
 <script>
+  (function() {
+    var pool = ['🌟','🚀','🎯','✨','🔥','💫','🎉','🌈','⚡','🎪','🦄','🌺','🍀','🎸','🏆'];
+    var picked = pool.sort(() => Math.random() - 0.5).slice(0, 3);
+    var title = document.querySelector('.topbar .title');
+    title.textContent = picked.join(' ') + ' ' + title.textContent;
+  })();
+</script>
+<script>
   fetch('PROJECT_OVERVIEW.md?v=' + Date.now())
     .then(r => r.text())
     .then(text => {
