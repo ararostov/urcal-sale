@@ -6,3 +6,5 @@
 - **Паспорт проекта:** `overview.html` → [PROJECT_OVERVIEW.md](./PROJECT_OVERVIEW.md)
 
 Страница публикуется через GitHub Pages.
+
+Обновления ведутся по мере поступления новой информации по сделке.
