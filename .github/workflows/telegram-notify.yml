@@ -2,22 +2,28 @@ name: Telegram Notify
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
       - name: Send Telegram notification
+        shell: bash
         run: |
           DATE=$(TZ='Europe/London' date '+%d.%m.%Y, %H:%M')
           COMMIT_MSG=$(echo "${{ github.event.head_commit.message }}" | head -1)
-          MESSAGE="🏠 Обновился документ о продаже дома в Urcal 📅 ${DATE}
+
+          MESSAGE=$(cat <<EOF
+🏠 Обновился документ о продаже дома в Urcal 📅 ${DATE}
 
 Что обновилось?
 • ${COMMIT_MSG}
 
-🔗 Подробнее: https://ararostov.github.io/urcal-sale/"
+🔗 Подробнее: https://ararostov.github.io/urcal-sale/
+EOF
+)
 
-          ENCODED=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.read().strip()))" <<< "$MESSAGE")
+          ENCODED=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.read()))" <<< "$MESSAGE")
           curl -s "https://api.callmebot.com/text.php?user=@aralondon&text=${ENCODED}"
