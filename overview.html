@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Паспорт проекта — Продажа дома</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.5.1/github-markdown-light.min.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  :root {
+    --bg: #ffffff;
+    --border: #d1d9e0;
+    --accent: #0969da;
+    --accent-hover: #0860ca;
+    --muted: #59636e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: #f6f8fa;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+  }
+  .topbar {
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    z-index: 100;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .topbar .title {
+    font-weight: 600;
+    font-size: 15px;
+    color: #1f2328;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .topbar .nav-btn {
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .topbar .nav-btn:hover,
+  .topbar .nav-btn:active {
+    background: var(--accent-hover);
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+  }
+  .markdown-body {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 20px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .bottom-nav {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+  }
+  .bottom-nav a {
+    background: #ffffff;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.15s;
+  }
+  .bottom-nav a:hover,
+  .bottom-nav a:active {
+    background: #f6f8fa;
+    border-color: var(--accent);
+  }
+  .footer-note {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 20px;
+  }
+  .loading {
+    text-align: center;
+    color: var(--muted);
+    padding: 40px 20px;
+  }
+  @media (max-width: 600px) {
+    .markdown-body {
+      padding: 16px 14px;
+      font-size: 15px;
+      border-radius: 6px;
+    }
+    .container {
+      padding: 14px 10px 30px;
+    }
+    .topbar .title {
+      font-size: 14px;
+    }
+    .topbar .nav-btn {
+      padding: 7px 12px;
+      font-size: 13px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="title">📋 Паспорт проекта</div>
+    <a href="index.html" class="nav-btn">← 📰 Лента событий</a>
+  </div>
+  <div class="container">
+    <article id="content" class="markdown-body">
+      <div class="loading">Загрузка…</div>
+    </article>
+    <div class="bottom-nav">
+      <a href="index.html">← Вернуться к ленте событий</a>
+    </div>
+    <div class="footer-note">Продажа дома · Bellavista 12, Urcal · Испания</div>
+  </div>
+
+<script>
+  fetch('PROJECT_OVERVIEW.md?v=' + Date.now())
+    .then(r => r.text())
+    .then(text => {
+      document.getElementById('content').innerHTML = marked.parse(text);
+    })
+    .catch(err => {
+      document.getElementById('content').innerHTML =
+        '<p style="color:#cf222e">Не удалось загрузить PROJECT_OVERVIEW.md. Проверь, что файл лежит рядом с overview.html.</p>';
+    });
+</script>
+</body>
+</html>
