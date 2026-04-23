@@ -16,13 +16,19 @@ jobs:
         run: |
           DATE=$(TZ='Europe/London' date '+%d.%m.%Y, %H:%M')
           FIRST_LINE=$(printf '%s\n' "$COMMIT_MSG" | head -1)
+          if printf '%s' "$FIRST_LINE" | grep -q '^Merge pull request'; then
+            SUMMARY=$(printf '%s\n' "$COMMIT_MSG" | awk 'NR>1 && NF {print; exit}')
+          else
+            SUMMARY="$FIRST_LINE"
+          fi
+          SUMMARY=${SUMMARY:-Обновление на сайте}
 
-          MESSAGE="🏠 У нас есть новости по продаже дома в Urcal
+          MESSAGE="🏠 На сайте про дом в Urcal есть обновление, посмотрите
           📅 ${DATE}
 
-          • ${FIRST_LINE}
+          • ${SUMMARY}
 
-          🔗 Подробнее: https://ararostov.github.io/urcal-sale/"
+          🔗 https://ararostov.github.io/urcal-sale/"
 
           ENCODED=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.stdin.read()))' <<< "$MESSAGE")
           curl -s "https://api.callmebot.com/text.php?user=@aralondon&text=${ENCODED}"
